@@ -1,5 +1,5 @@
 const way={
-  HomeView: "/",
+  HomeView: "/goit-react-hw-08-phonebook",
   LoginView: "/login",
   RegisterView: "/register",
   ContactsView: "/contacts"

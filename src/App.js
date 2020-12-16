@@ -52,7 +52,7 @@ class App extends Component {
               path={routes.RegisterView}
               component={AsynkRegisterView}
             />
-            <Redirect to="/" />
+            <Redirect to="/goit-react-hw-08-phonebook" />
           </Switch>
         </Suspense>
         </BrowserRouter>
