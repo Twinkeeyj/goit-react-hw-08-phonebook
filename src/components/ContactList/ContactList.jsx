@@ -7,6 +7,7 @@ import contactsOperation from '../../redux/contacts/contactsOperation';
 import selector from "../../redux/listSelector"
 
 class ContactList extends Component {
+  
   render() {
      return (
       <>

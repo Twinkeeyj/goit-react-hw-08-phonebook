@@ -9,6 +9,20 @@ import  authOperations  from '../redux/auth/authOperations';
     email: '',
     password: '',
   };
+  componentDidMount(){
+    if(this.props.isAuthenticated){
+      this.props.history.replace("/contacts")
+
+      return
+    }
+  }
+  componentDidUpdate(){
+    if(this.props.isAuthenticated){
+      this.props.history.replace("/contacts")
+
+      return
+    }
+  }
 
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
@@ -57,5 +71,9 @@ import  authOperations  from '../redux/auth/authOperations';
     )
   }
 }
+const mapStateToProps=state=>({
+  isAuthenticated: state.auth.token,
+})
 
-export default connect(null, { onLogin: authOperations.logIn })(LoginView);
+
+export default connect(mapStateToProps, { onLogin: authOperations.logIn })(LoginView);

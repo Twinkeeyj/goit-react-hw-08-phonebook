@@ -6,14 +6,30 @@ import classes from '../App.module.css';
 import ContactForm from '../components/ContactForm/ContactForm';
 import ContactList from '../components/ContactList/ContactList';
 import Filter from '../components/Filter/Filter';
+import { connect } from 'react-redux';
+import contactsOperations from "../redux/contacts/contactsOperation"
 
-export default class ContactsView extends Component {
+ class ContactsView extends Component {
+  componentDidMount(){
+    if(!this.props.isAuthenticated){
+      this.props.history.replace("/")
 
+      return
+    }
+    this.props.onFetchContact()
+  }
+  componentDidUpdate(){
+    if(!this.props.isAuthenticated){
+      this.props.history.replace("/")
+
+      return
+    }
+  }
 
   render() {
     return (
       <div className={classes.container}>
-        
+
       <CSSTransition
             in={true}
             classNames="logo"
@@ -31,3 +47,11 @@ export default class ContactsView extends Component {
     )
   }
 }
+const mapStateToProps=state=>({
+  isAuthenticated: state.auth.token,
+})
+
+const mapDispatchToProps={
+  onFetchContact: contactsOperations.fetchContact
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ContactsView);

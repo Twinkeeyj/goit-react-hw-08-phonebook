@@ -10,6 +10,13 @@ import authOperations from "../redux/auth/authOperations"
     email: '',
     password: '',
   };
+  componentDidUpdate(){
+    if(this.props.isAuthenticated){
+      this.props.history.replace("/contacts")
+
+      return
+    }
+  }
 
   handleSubmit = e => {
     e.preventDefault();
@@ -72,6 +79,10 @@ import authOperations from "../redux/auth/authOperations"
   }
 }
 
-export default connect(null, { onRegister: authOperations.register })(
+const mapStateToProps=state=>({
+  isAuthenticated: state.auth.token,
+})
+
+export default connect(mapStateToProps, { onRegister: authOperations.register })(
   RegisterView,
 );

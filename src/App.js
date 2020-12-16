@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import routes from './route';
 import UserMenu from "./components/UserMenu/UserMenu"
 import authOperations from "./redux/auth/authOperations"
+import Loader from "./components/loading/loading"
 
 const AsynkHomeView = lazy(() => import('./views/HomeView'));
 const AsynkLoginView = lazy(() => import('./views/LoginView'));
@@ -19,12 +20,12 @@ class App extends Component {
     this.props.onGetCurrentUser();
   }
   render() {
-    console.log(JSON.parse(localStorage.getItem('persist:auth')));
+
     return (
       <>
 
       <BrowserRouter>
-      <Suspense fallback={<h3>Loading...</h3>}>
+      <Suspense fallback={<><Loader/><h3>Loading...</h3></>}>
        {this.props.isAuthenticated && <UserMenu/>}
 
 
