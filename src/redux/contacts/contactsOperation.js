@@ -1,12 +1,13 @@
 import listAction from '../listActions';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com/';
+axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com';
 
 const addContact = ({ name, number }) => dispatch => {
+  
   dispatch(listAction.addListRequest());
   axios
-    .post('/contacts', { name, number})
+    .post('/contacts', { name, number })
     .then(response => {
       dispatch(listAction.addListSuccess(response.data));
     })
@@ -24,7 +25,7 @@ const fetchContact = () => dispatch => {
     .catch(error => dispatch(listAction.fetchListError(error)));
 };
 
-const removeContact = (id) => (dispatch) => {
+const removeContact = id => dispatch => {
   dispatch(listAction.removeListRequest());
   axios
     .delete(`/contacts/${id}`)
@@ -34,12 +35,8 @@ const removeContact = (id) => (dispatch) => {
     .catch(error => dispatch(listAction.removeListError(error)));
 };
 
-
 export default {
   removeContact,
   addContact,
   fetchContact,
 };
-
-
-// https://goit-phonebook-api.herokuapp.com/

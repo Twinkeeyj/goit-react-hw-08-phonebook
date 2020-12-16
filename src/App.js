@@ -1,9 +1,6 @@
-import contactsOperation from './redux/contacts/contactsOperation';
-import selector from './redux/listSelector';
-import ContactsView from './views/ContactsView';
-import classes from './App.module.css';
+
 import React, { Component, lazy, Suspense } from 'react';
-import {BrowserRouter, Redirect, Route, Switch, NavLink } from 'react-router-dom';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import { connect } from 'react-redux';
 import routes from './route';
 import UserMenu from "./components/UserMenu/UserMenu"
@@ -17,7 +14,12 @@ const AsynkContactsView = lazy(() => import('./views/ContactsView'));
 
 class App extends Component {
   componentDidMount() {
-    this.props.onGetCurrentUser();
+    if(this.props.isAuthenticated){
+      this.props.onGetCurrentUser();
+
+      return
+    }
+
   }
   render() {
 
