@@ -1,60 +1,68 @@
-import React, { Component } from 'react';
-
-import ContactForm from './components/ContactForm/ContactForm';
-import ContactList from './components/ContactList/ContactList';
-import Filter from './components/Filter/Filter';
+import contactsOperation from './redux/contacts/contactsOperation';
+import selector from './redux/listSelector';
+import ContactsView from './views/ContactsView';
 import classes from './App.module.css';
-import { CSSTransition } from 'react-transition-group';
+import React, { Component, lazy, Suspense } from 'react';
+import {BrowserRouter, Redirect, Route, Switch, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import  contactsOperation from "./redux/contacts/contactsOperation"
-import selector from "./redux/listSelector"
+import routes from './route';
+import UserMenu from "./components/UserMenu/UserMenu"
+import authOperations from "./redux/auth/authOperations"
 
+const AsynkHomeView = lazy(() => import('./views/HomeView'));
+const AsynkLoginView = lazy(() => import('./views/LoginView'));
+const AsynkRegisterView = lazy(() => import('./views/RegisterView'));
+const AsynkContactsView = lazy(() => import('./views/ContactsView'));
 
 class App extends Component {
   componentDidMount() {
-    this.props.onFetchContact()
+    this.props.onGetCurrentUser();
   }
-
-  render(){
+  render() {
+    console.log(JSON.parse(localStorage.getItem('persist:auth')));
     return (
       <>
-      {this.props.isLodingContact && <h1>Loading....</h1>}
-        <div className={classes.container}>
-          <CSSTransition
-            in={true}
-            classNames="logo"
-            timeout={250}
-            appear={true}
-            unmountOnExit
-          >
-            <h1>Phonebook</h1>
-          </CSSTransition>
-          <ContactForm />
-          <h2>Contacts</h2>
 
-          <Filter />
+      <BrowserRouter>
+      <Suspense fallback={<h3>Loading...</h3>}>
+       {this.props.isAuthenticated && <UserMenu/>}
 
-          <ContactList />
-          {/* <CSSTransition
-              in={isVisible}
-              timeout={250}
-              unmountOnExit
-              classNames="answer"
-            >
-              <AnswerError answer={answer} />
-            </CSSTransition> */}
-        </div>
+
+
+            <Switch>
+            <Route
+              exact
+              path={routes.HomeView}
+              component={AsynkHomeView}
+            />
+            <Route
+              exact
+              path={routes.LoginView}
+              component={AsynkLoginView}
+            />
+            <Route
+              exact
+              path={routes.ContactsView}
+              component={AsynkContactsView}
+            />
+            <Route
+              path={routes.RegisterView}
+              component={AsynkRegisterView}
+            />
+            <Redirect to="/" />
+          </Switch>
+        </Suspense>
+        </BrowserRouter>
       </>
     );
   }
-
 }
+const mapStateToProps=state=>({
+  isAuthenticated: state.auth.token,
+})
 
-const mapStateToProps = state => ({
-  isLodingContact: selector.getLoding(state),
-});
+export default connect(mapStateToProps, {
+  onGetCurrentUser: authOperations.getCurrentUser,
 
-const mapDispatchToProps={
-  onFetchContact: contactsOperation.fetchContact
-}
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+})(App);
+
