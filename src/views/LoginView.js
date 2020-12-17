@@ -47,6 +47,7 @@ import  authOperations  from '../redux/auth/authOperations';
           <label >
             Email
             <input
+            required
               type="email"
               name="email"
               value={email}
@@ -57,6 +58,7 @@ import  authOperations  from '../redux/auth/authOperations';
           <label >
             Password
             <input
+            required
               type="password"
               name="password"
               value={password}

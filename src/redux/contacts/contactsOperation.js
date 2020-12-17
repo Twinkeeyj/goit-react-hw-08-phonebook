@@ -4,14 +4,14 @@ import axios from 'axios';
 axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com';
 
 const addContact = ({ name, number }) => dispatch => {
-  
+
   dispatch(listAction.addListRequest());
   axios
     .post('/contacts', { name, number })
     .then(response => {
       dispatch(listAction.addListSuccess(response.data));
     })
-    .catch(error => dispatch(listAction.addListError(error)));
+    .catch(error => dispatch(listAction.addListError(error)) );
 };
 
 const fetchContact = () => dispatch => {

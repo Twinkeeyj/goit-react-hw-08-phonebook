@@ -20,7 +20,7 @@ import authOperations from "../redux/auth/authOperations"
 
   handleSubmit = e => {
     e.preventDefault();
-  console.log(e);
+
 
 
   this.props.onRegister({ ...this.state });
@@ -29,7 +29,7 @@ import authOperations from "../redux/auth/authOperations"
 
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
-    console.log({[name]: value });
+
   };
 
   render() {
@@ -44,6 +44,7 @@ import authOperations from "../redux/auth/authOperations"
           <label >
             Name
             <input
+            required
               type="text"
               name="name"
               value={name}
@@ -54,6 +55,7 @@ import authOperations from "../redux/auth/authOperations"
           <label>
             Email
             <input
+            required
               type="email"
               name="email"
               value={email}
@@ -64,6 +66,7 @@ import authOperations from "../redux/auth/authOperations"
           <label >
             Password
             <input
+            required
               type="password"
               name="password"
               value={password}
