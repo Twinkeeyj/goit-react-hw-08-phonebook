@@ -23,11 +23,12 @@ class HomeView extends Component  {
 
   render(){
   return (
-    <div>
-      <h1>Home page</h1>
-      <NavLink to={route.LoginView}>Login</NavLink>
-      <NavLink to={route.RegisterView}>Register</NavLink>
-
+    <div className="naw-container">
+      <div>
+      <h1 className="title">Home page</h1>
+      <NavLink className="naw-button" to={route.LoginView}>Login</NavLink>
+      <NavLink className="naw-button" to={route.RegisterView}>Register</NavLink>
+      </div>
     </div>
   );
   }

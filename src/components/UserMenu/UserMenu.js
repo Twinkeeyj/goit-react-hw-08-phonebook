@@ -5,19 +5,18 @@ import authOperations from "../../redux/auth/authOperations"
 
 const UserMenu = ({ avatar, name, onLogout }) => (
   <div >
-    <img src={avatar} alt="Твоє фото мудак!!!!!" width="32"  />
-    <span >Welcome, {name}</span>
+    <img src={avatar} alt="Твоє фото!!" width="32"  />
+    <span className="user-title">Welcome, {name}</span>
 
-    <button type="button" onClick={onLogout}>
+    {/* <button type="button" onClick={onLogout}>
       Logout
-    </button>
+    </button> */}
   </div>
 );
 
 const mapStateToProps = state => ({
   name: state.auth.user.name,
-  avatar:
-    'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ea/ea25bf27b1917865960af3c6e2364c29b83f58bd_full.jpg',
+  avatar:"https://w7.pngwing.com/pngs/880/546/png-transparent-smiley-emoticon-computer-icons-emoticon-smile-smiley-online-chat-glasses.png"
 });
 
 export default connect(mapStateToProps, { onLogout: authOperations.logOut })(

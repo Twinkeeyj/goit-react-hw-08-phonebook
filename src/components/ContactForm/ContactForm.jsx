@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import newContact from '../../redux/contacts/contactsOperation';
 import AnswerError from '../AnswerError/AnswerError';
 import selector from "../../redux/listSelector"
+import authOperations from "../../redux/auth/authOperations"
 
 class ContactForm extends Component {
   state = {
@@ -79,7 +80,11 @@ class ContactForm extends Component {
             value={number}
             onChange={this.handleChange}
           />
-          <input  type="submit" value="Add contact"  />
+          <input className="form-add"  type="submit" value="Add contact"  />
+
+          <button className="form-out" type="button" onClick={this.props.onLogout}>
+      Logout
+    </button>
         </form>
       </>
     );
@@ -92,6 +97,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   addContact: newContact.addContact,
+  onLogout: authOperations.logOut
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

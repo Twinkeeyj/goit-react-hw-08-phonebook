@@ -35,13 +35,13 @@ import authOperations from "../redux/auth/authOperations"
   render() {
     const { name, email, password } = this.state;
     return (
-      <div>
-              <NavLink to={route.HomeView}>back</NavLink>
+      <div className="naw-container">
+
               <div>
-        <h1>Register page</h1>
+        <h1 className="title">Register page</h1>
 
         <form onSubmit={this.handleSubmit} >
-          <label >
+          <label className="field-name" >
             Name
             <input
             required
@@ -52,7 +52,7 @@ import authOperations from "../redux/auth/authOperations"
             />
           </label>
 
-          <label>
+          <label className="field-name">
             Email
             <input
             required
@@ -63,7 +63,7 @@ import authOperations from "../redux/auth/authOperations"
             />
           </label>
 
-          <label >
+          <label className="field-name" >
             Password
             <input
             required
@@ -73,8 +73,8 @@ import authOperations from "../redux/auth/authOperations"
               onChange={this.handleChange}
             />
           </label>
-
-          <button type="submit">Register</button>
+          <button className="natural-button" type="submit">Register</button>
+          <NavLink className="naw-button" to={route.HomeView}>back</NavLink>
         </form>
       </div>
       </div>

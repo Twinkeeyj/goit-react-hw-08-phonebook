@@ -6,8 +6,8 @@ import selector from "../../redux/listSelector"
 
 
 const FilterName = ({ filterRender, filter }) => (
-  <div>
-    <label>Find contacts by name</label>
+  <div className="filter-cont">
+    <label >Find contacts by name</label>
     <input
       type="text"
       value={filter}

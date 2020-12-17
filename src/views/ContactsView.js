@@ -8,6 +8,8 @@ import ContactList from '../components/ContactList/ContactList';
 import Filter from '../components/Filter/Filter';
 import { connect } from 'react-redux';
 import contactsOperations from "../redux/contacts/contactsOperation"
+import UserMenu from "../components/UserMenu/UserMenu"
+
 
  class ContactsView extends Component {
   componentDidMount(){
@@ -29,7 +31,7 @@ import contactsOperations from "../redux/contacts/contactsOperation"
   render() {
     return (
       <div className={classes.container}>
-
+  {this.props.isAuthenticated && <UserMenu/>}
       <CSSTransition
             in={true}
             classNames="logo"

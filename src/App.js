@@ -28,7 +28,7 @@ class App extends Component {
 
       <BrowserRouter>
       <Suspense fallback={<><Loader/><h3>Loading...</h3></>}>
-       {this.props.isAuthenticated && <UserMenu/>}
+       {/* {this.props.isAuthenticated && <UserMenu/>} */}
 
 
 
